@@ -32,7 +32,7 @@ app.get('/', async function(req, res) {
                   }
                 ]
         });
-
+          console.log(blogs, "BLOGS")
         // Render the homepage with all the blog posts
         await res.render('pages/home', { blogs: blogs });
       } catch (error) {
@@ -97,4 +97,9 @@ app.post("/delete/:id", async (req, res) => {
   });
 
 // Tells the app which port to run on
+console.log("Running on Port 8080")
+app.get('/demo', function(req, res) {
+  res.render('pages/demo');
+});
+
 app.listen(8080);
