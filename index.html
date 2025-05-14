@@ -1,91 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHy42QBHTPOlsqHosFaebYl47p51hgWozI1Q&s" 
-alt="Discharge Advice Logo" width="600"/>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHy42QBHTPOlsqHosFaebYl47p51hgWozI1Q&s" 
-alt="Discharge Advice Logo" width="600"/>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Discharge Advice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #4747391b;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #d5650ab4;
+            color: rgb(103, 58, 4);
+            text-align: left;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .date-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .navigation-container {
+            background-color: rgba(224, 246, 57, 0.236);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        
+        .category-icon img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+        
+        .category-btn {
+            background-color: #F3F4F6;
+            color: #374151;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.2s;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-btn:hover {
+            background-color: #E5E7EB;
+            transform: translateY(-2px);
+        }
+        
+        .show-all-btn {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .show-all-btn:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+        }
+        
+        .search-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-container h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        #advice-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wound-card {
+            border-top: 5px solid #EF4444;
+        }
+        
+        .fever-card {
+            border-top: 5px solid #F59E0B;
+        }
+        
+        .asthma-card {
+            border-top: 5px solid #3B82F6;
+        }
+        
+        .medication-card {
+            border-top: 5px solid #10B981;
+        }
+        
+        .followup-card {
+            border-top: 5px solid #8B5CF6;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card h3 {
+            color: #111827;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .card p {
+            color: #4B5563;
+            margin-bottom: 1rem;
+        }
+        
+        .card ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4B5563;
+        }
+        
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card a {
+            display: inline-block;
+            color: #4F46E5;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .additional-info {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .additional-info h2 {
+            color: #111827;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .language-selector, .personalize-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .language-selector select {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            background-color: white;
+            font-size: 1rem;
+            width: 200px;
+        }
+        
+        .personalize-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .personalize-container input {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            font-size: 1rem;
+            width: 100px;
+        }
+        
+        .personalize-container button {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        #age-confirmation {
+            margin-top: 0.5rem;
+            color: #4B5563;
+        }
+        
+        footer {
+            background-color: #374151;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .date-badge {
+                position: static;
+                display: inline-block;
+                margin-top: 1rem;
+            }
+            
+            #advice-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-icon img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-<h1 class>DISCHARGE ADVICE</h1>
- <p>Your post-discharge instructions, organized and accessible</p>
-
-</header>
-<main>
-    <nav>
-      <img src="https://leafcare.co.uk/alovoocm/uploads/2023/06/Wound-Management-and-Care.webp" 
-alt="Discharge Advice Logo" width="100"/>
-<button onclick="filterAdvice('wound')">Wound Care</button>
-      <div> </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-ha5pgY4lxAVz5NyHnf2vHEnUtxLHzbSI5A&s" 
-alt="Discharge Advice Logo" width="100"/>
-<button onclick="filterAdvice('fever')">Fever</button>
-      <div> </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtqZgdNBPoNVW00nrh5hfpacpZ7L6JjdlvLA&s" 
-alt="Discharge Advice Logo" width="100"/>
-<button onclick="filterAdvice('asthma')">Asthma</button>
-      <div></div>
-      <div></div>
-<button onclick="filterAdvice('all')">Show All</button>
-    </nav>
-
-<div id="advice-container">
-      <div class="card" data-category="wound">
-        <h3>Wound Care</h3>
-        <p>Keep the wound dry and clean for 48 hours. Change dressing as instructed. Watch for signs of infection.</p>
-      </div>
-      <div class="card" data-category="fever">
-        <h3>Fever Management</h3>
-        <p>Use paracetamol as prescribed. Monitor temperature every 4 hours. Stay hydrated.</p>
-      </div>
-      <div class="card" data-category="asthma">
-        <h3>Asthma Discharge Advice</h3>
-        <p>Continue inhaler use as directed. Avoid known triggers. Follow-up in 1 week.</p>
-      </div>
-    </div>
-  </main>
- <script>
-    function filterAdvice(category) {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+    <header>
+        <h1>DISCHARGE ADVICE</h1>
+        <p>Your post-discharge instructions, organized and accessible</p>
+        <div class="date-badge">Date: May 14, 2025</div>
+    </header>
+    
+    <main>
+        <div class="navigation-container">
+            <nav>
+                <div class="category-icon">
+                    <img src="https://media.healthecareers.com/wp-content/uploads/2022/01/02181355/Shutterstock_2411255281.jpg.webp" alt="Wound Care Icon">
+                </div>
+                <div class="category-icon">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-ha5pgY4lxAVz5NyHnf2vHEnUtxLHzbSI5A&s" alt="Fever Icon">
+                </div>
+                <div class="category-icon">
+                    <img src="data:image/jpeg;base64,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" alt="Asthma Icon">
+                </div>
+                <div class="category-icon">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUTTRozm1dRCnRJHE3tr7d2EqFqZw4ITTEMQ&s" alt="Fever Icon">
+                </div>
+            </nav>
+            
+            <div>
+                <button class="category-btn" onclick="filterAdvice('wound')">Wound Care</button>
+                <button class="category-btn" onclick="filterAdvice('fever')">Fever</button>
+                <button class="category-btn" onclick="filterAdvice('asthma')">Asthma</button>
+                <button class="show-all-btn" onclick="filterAdvice('all')">Show All</button>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <h2>Search Advice</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Enter keywords...">
+                <button onclick="searchAdvice()">Search</button>
+            </div>
+        </div>
+        
+        <div id="advice-container">
+            <div class="card wound-card" data-category="wound">
+                <div class="card-content">
+                    <h3>Wound Care</h3>
+                    <p>Keep the wound dry and clean for 48 hours. Change dressing as instructed. Watch for signs of infection.</p>
+                    <a href="https://www.ktph.com.sg/health-library/view?healthID=397" target="_blank">More about Wound Care</a>
+                </div>
+            </div>
+            
+            <div class="card fever-card" data-category="fever">
+                <div class="card-content">
+                    <h3>Fever Management</h3>
+                    <p>Use paracetamol as prescribed. Monitor temperature every 4 hours. Stay hydrated.</p>
+                    <a href="https://www.moh.gov.sg/seeking-healthcare/getting-medical-help/conditions/fever" target="_blank">More about Fever Management</a>
+                </div>
+            </div>
+            
+            <div class="card asthma-card" data-category="asthma">
+                <div class="card-content">
+                    <h3>Asthma Discharge Advice</h3>
+                    <p>Continue inhaler use as directed. Avoid known triggers. Follow-up in 1 week.</p>
+                    <a href="https://www.ktph.com.sg/health-library/view?healthID=276" target="_blank">Asthma Action Plan</a>
+                </div>
+            </div>
+            
+            <div class="card medication-card" data-category="medication">
+                <div class="card-content">
+                    <h3>Medication Instructions</h3>
+                    <p>Follow the prescribed dosage schedule. Complete the full course of antibiotics if prescribed. Do not skip doses.</p>
+                </div>
+            </div>
+            
+            <div class="card followup-card" data-category="followUp">
+                <div class="card-content">
+                    <h3>Follow-up Appointments</h3>
+                    <p>Next appointment: 21 May 2025 at 10:00 AM. Bring all current medications to your appointment.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="additional-info">
+            <div class="language-selector">
+                <h2>Language</h2>
+                <select id="language-select" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="zh">Chinese</option>
+                    <option value="ms">Malay</option>
+                    <option value="ta">Tamil</option>
+                </select>
+            </div>
+            
+            <div class="personalize-container">
+                <h2>Age:</h2>
+                <input type="text" id="user-age" placeholder="Enter age">
+                <button onclick="saveAge()">Submit</button>
+                <p id="age-confirmation"></p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2025 Discharge Advice System. For medical emergencies, please call 995 or visit the nearest Emergency Department.</p>
+    </footer>
+    
+    <script>
+        function filterAdvice(category) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
-      });
-    }
-  </script>
-
-<h2 class>Language</h2>
-<h3 class="title" id="important">Search</h3>
-<h3>Date: 14 May 2025</h3>
-<button onclick="sayHello()">QR Code </button>
-
-<hr>
-
- <input type="text" name="Age" id="user-input">
- <button onclick="showAge()">Submit Your Age</button>
-
-<h3>Thanks for confirming that your age is: <span id="header-age"></span></h3>
-
-
-
-<h4></h4> <a href="https://www.ktph.com.sg/health-library/view?healthID=276">Asthma Action Plan</a>
-<h4> </h4> <a href="https://www.ktph.com.sg/health-library/view?healthID=397" class=”>Wound Care</a>
-<h4> </h4> <a href="https://www.moh.gov.sg/seeking-healthcare/getting-medical-help/conditions/fever" class=”>Fever</a>
-
-
-
-</body>
-</html>
+        
+        function searchAdvice() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        function changeLanguage
