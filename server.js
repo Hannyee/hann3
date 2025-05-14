@@ -4,6 +4,7 @@ require("dotenv").config();
 // Needed for Express
 var express = require('express')
 var app = express()
+var axios = require('axios');
 
 // Needed for EJS
 app.set('view engine', 'ejs');
@@ -40,6 +41,18 @@ app.get('/', async function(req, res) {
         console.log(error);
       } 
 });
+
+// Weather 
+app.get('/weather', async (req, res) => {
+  try {
+    const response = await axios.get('https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast');
+    res.render('pages/weather', { weather: response.data });
+  } catch (error) {
+    console.error(error);
+    res.send('Error fetching weather data');
+  }
+  });
+
 
 // About page
 app.get('/about', function(req, res) {
