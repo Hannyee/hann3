@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<img src="https://blog.wcei.net/wp-content/uploads/2019/07/Discharge_instructions_SM.jpg" 
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxQEDdrCw7S-aUg2k-wuC6r59WvpWBPFOpTs9-Xw7BXUWFDQksgn9m_oiD2w4i14rATfYB-Y2dGuct5Lvr9StGbw55uHXGjFBAQ68dixw35hqBJEYrMLinaGwTAJ-LTFRax2jGrjpTx2Q/s1600/Untitled.png" 
 alt="Discharge Advice Logo" width="500" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
      <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-
 </head>
 <body>
+<header>
 <h1 class>DISCHARGE ADVICE</h1>
+ <p>Your post-discharge instructions, organized and accessible</p>
+</header>
+<main>
+    <nav>
+      <button onclick="filterAdvice('wound')">Wound Care</button>
+      <button onclick="filterAdvice('fever')">Fever</button>
+      <button onclick="filterAdvice('asthma')">Asthma</button>
+      <button onclick="filterAdvice('all')">Show All</button>
+    </nav>
+
+<div id="advice-container">
+      <div class="card" data-category="wound">
+        <h3>Wound Care</h3>
+        <p>Keep the wound dry and clean for 48 hours. Change dressing as instructed. Watch for signs of infection.</p>
+      </div>
+      <div class="card" data-category="fever">
+        <h3>Fever Management</h3>
+        <p>Use paracetamol as prescribed. Monitor temperature every 4 hours. Stay hydrated.</p>
+      </div>
+      <div class="card" data-category="asthma">
+        <h3>Asthma Discharge Advice</h3>
+        <p>Continue inhaler use as directed. Avoid known triggers. Follow-up in 1 week.</p>
+      </div>
+    </div>
+  </main>
+ <script>
+    function filterAdvice(category) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 
 <h2 class>Language</h2>
 <h3 class="title" id="important">Search</h3>
